@@ -1,0 +1,19 @@
+{
+    "name": "custome/auth",
+    "description": "custome auth",
+    "autoload": {
+        "psr-4": {
+            "Custome\\Auth\\": "src/",
+            "Laravel\\Fortify\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "custom auth",
+            "email": "custome@auth.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.0.1"
+    }
+}
