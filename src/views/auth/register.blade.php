@@ -109,13 +109,13 @@
                                 <!-- Register buttons -->
                                 <div class="text-center">
                                     <p>or sign up with:</p>
-                                    <button type="button" class="btn btn-link btn-floating mx-1">
+                                    <a href="{{ route('auth.facebook') }}" type="button" class="btn btn-link btn-floating mx-1">
                                         <i class="fab fa-facebook-f"></i>
-                                    </button>
+                                    </a>
 
-                                    <button type="button" class="btn btn-link btn-floating mx-1">
+                                    <a href="{{ route('auth.google') }}" type="button" class="btn btn-link btn-floating mx-1">
                                         <i class="fab fa-google"></i>
-                                    </button>
+                                    </a>
 
                                     <button type="button" class="btn btn-link btn-floating mx-1">
                                         <i class="fab fa-twitter"></i>

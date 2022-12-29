@@ -40,6 +40,7 @@ class CustomeAuthServiceProvider extends ServiceProvider
         (new Filesystem)->ensureDirectoryExists(app_path('Actions/Fortify'));
 
         copy(__DIR__.'/Contracts/CreateNewUser.php', app_path('Actions/Fortify/CreateNewUser.php'));
+        copy(__DIR__.'/database/2022_12_12_131652_add_google_id_column.php', base_path('database/migrations/2022_12_12_131652_add_google_id_column.php'));
     }
 
 }
