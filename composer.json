@@ -1,6 +1,6 @@
 {
-    "name": "custome/auth",
-    "description": "custome auth",
+    "name": "custometest/auth",
+    "description": "custome test auth",
     "autoload": {
         "psr-4": {
             "Custome\\Auth\\": "src/",
@@ -9,7 +9,7 @@
     },
     "authors": [
         {
-            "name": "custom auth",
+            "name": "custom test auth",
             "email": "custome@auth.com"
         }
     ],
