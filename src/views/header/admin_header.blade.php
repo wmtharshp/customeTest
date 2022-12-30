@@ -461,39 +461,44 @@
         }
     }
 </style>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+{{-- <link rel="stylesheet" href="{{asset('assets/css/responsive.bootstrap5.css')}}"> --}}
 <div class='dashboard'>
     <div class="dashboard-nav">
-        <header><a href="#!" class="menu-toggle"><i class="fas fa-bars"></i></a><a href="#" class="brand-logo"><i
-                    class="fas fa-anchor"></i> <span>BRAND</span></a></header>
-        <nav class="dashboard-nav-list"><a href="#" class="dashboard-nav-item"><i class="fas fa-home"></i>
-                Home </a><a href="#" class="dashboard-nav-item active"><i class="fas fa-tachometer-alt"></i>
-                dashboard
-            </a><a href="#" class="dashboard-nav-item"><i class="fas fa-file-upload"></i> Upload </a>
-            <div class='dashboard-nav-dropdown'><a href="#!"
+        <header><a href="#!" class="menu-toggle"><i class="fas fa-bars"></i></a><a href="{{route('home')}}" class="brand-logo"><i class="fa-solid fa-globe"></i> <span>BRAND</span></a></header>
+        <nav class="dashboard-nav-list">
+
+            <a href="{{ route('home') }}" class="dashboard-nav-item active"><i class="fa-solid fa-house-user"></i>
+                Home
+            </a>
+            {{-- <a href="#" class="dashboard-nav-item"><i class="fas fa-file-upload"></i> Upload </a> --}}
+            {{-- <div class='dashboard-nav-dropdown'><a href="#!"
                     class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fas fa-photo-video"></i> Media
                 </a>
-                <div class='dashboard-nav-dropdown-menu'><a href="#" class="dashboard-nav-dropdown-item">All</a><a
-                        href="#" class="dashboard-nav-dropdown-item">Recent</a><a href="#"
-                        class="dashboard-nav-dropdown-item">Images</a><a href="#"
-                        class="dashboard-nav-dropdown-item">Video</a></div>
-            </div>
-            <div class='dashboard-nav-dropdown'><a href="#!"
+                <div class='dashboard-nav-dropdown-menu'>
+                    <a href="#" class="dashboard-nav-dropdown-item">All</a>
+                    <a href="#" class="dashboard-nav-dropdown-item">Recent</a>
+                    <a href="#" class="dashboard-nav-dropdown-item">Images</a>
+                    <a href="#" class="dashboard-nav-dropdown-item">Video</a>
+                </div>
+            </div> --}}
+            {{-- <div class='dashboard-nav-dropdown'><a href="#!"
                     class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fas fa-users"></i> Users </a>
                 <div class='dashboard-nav-dropdown-menu'><a href="#" class="dashboard-nav-dropdown-item">All</a><a
                         href="#" class="dashboard-nav-dropdown-item">Subscribed</a><a href="#"
                         class="dashboard-nav-dropdown-item">Non-subscribed</a><a href="#"
                         class="dashboard-nav-dropdown-item">Banned</a><a href="#"
                         class="dashboard-nav-dropdown-item">New</a></div>
-            </div>
-            <div class='dashboard-nav-dropdown'><a href="#!"
+            </div> --}}
+            {{-- <div class='dashboard-nav-dropdown'><a href="#!"
                     class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fas fa-money-check-alt"></i>
                     Payments </a>
                 <div class='dashboard-nav-dropdown-menu'><a href="#" class="dashboard-nav-dropdown-item">All</a><a
                         href="#" class="dashboard-nav-dropdown-item">Recent</a><a href="#"
                         class="dashboard-nav-dropdown-item"> Projections</a>
                 </div>
-            </div>
-            <a href="#" class="dashboard-nav-item"><i class="fas fa-cogs"></i> Settings </a><a href="#"
+            </div> --}}
+            <a href="{{route("users.index")}}" class="dashboard-nav-item"><i class="fa-solid fa-users"></i> Users </a><a href="#"
                 class="dashboard-nav-item"><i class="fas fa-user"></i> Profile </a>
             <div class="nav-item-divider"></div>
             <div class="text-center">
@@ -507,7 +512,8 @@
     </div>
     <div class='dashboard-app'>
         <header class='dashboard-toolbar'><a href="#!" class="menu-toggle"><i class="fas fa-bars"></i></a></header>
-        <div class='dashboard-content'>
+        @yield('headercontent')
+        {{-- <div class='dashboard-content'>
             <div class='container'>
                 <div class='card'>
                     <div class='card-header'>
@@ -518,10 +524,12 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="{{asset('assets/js/jtables-datatables-advanced.js')}}"></script>
+    <script src="{{asset('assets/js/jquery.dataTables.js')}}"></script>
 <script>
     const mobileScreen = window.matchMedia("(max-width: 990px )");
     $(document).ready(function() {

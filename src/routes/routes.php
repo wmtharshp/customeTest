@@ -5,6 +5,7 @@ use Custome\Auth\Http\Controllers\AuthController;
 use Custome\Auth\Http\Controllers\RegisterController;
 use Custome\Auth\Http\Controllers\GoogleController;
 use Custome\Auth\Http\Controllers\FacebookController;
+use Custome\Auth\Http\Controllers\Admin\UserController;
 
 Route::group(['middleware' => ['web']], function () {
 
@@ -31,8 +32,14 @@ Route::group(['middleware' => ['web']], function () {
         'auth',
         'verified'
     ])->group(function () {
+
         Route::get('/home', function () {
             return view('auth::dashboard');
         })->name('home');
+
+        Route::resources([
+            'users' => UserController::class
+        ]);
+        
     });
 });
