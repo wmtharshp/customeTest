@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Auth\Events\Registered;
-use App\Contracts\CreateNewUser;
+use App\Actions\Contracts\CreateNewUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Auth\StatefulGuard;
 

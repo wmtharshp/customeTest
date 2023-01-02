@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Contracts;
+namespace App\Actions\Contracts;
 
 use App\Rules\Password;
 
