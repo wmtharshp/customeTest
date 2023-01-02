@@ -20,10 +20,11 @@
                 <a href="#" class="nav-link">Contact</a>
             </li>
         </ul>
-
+       
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
             <!-- Navbar Search -->
+           
             <li class="nav-item">
                 <a class="nav-link" data-widget="navbar-search" href="#" role="button">
                     <i class="fas fa-search"></i>
@@ -55,6 +56,14 @@
                     role="button">
                     <i class="fas fa-th-large"></i>
                 </a>
+            </li>
+            <li class="nav-item">
+                <form action="{{route('logout')}}" method="POST">
+                    @csrf
+                    <button type="submit" class="nav-link btn btn-sm text-white btn-danger">
+                        <i class="fa-solid fa-right-from-bracket"></i> Logout
+                    </button>
+                </form>
             </li>
         </ul>
     </nav>

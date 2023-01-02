@@ -39,7 +39,7 @@ class InstallCommand extends Command
         copy(__DIR__.'/../Contracts/PasswordValidationRules.php', app_path('Actions/Contracts/PasswordValidationRules.php'));
         copy(__DIR__.'/../database/2022_12_12_131652_add_google_id_column.php', base_path('database/migrations/2022_12_12_131652_add_google_id_column.php'));
         copy(__DIR__.'/../DataTables/UsersDataTable.php', app_path('DataTables/UsersDataTable.php'));
-        copy(__DIR__.'/../Rules', app_path('/Rules'));
+        copy(__DIR__.'/../Rules/Password.php', app_path('/Rules/Password.php'));
 
 
         app()->make(\App\Composer::class)->run(['require', 'yajra/laravel-datatables-oracle:^10.0']);
