@@ -44,7 +44,7 @@
     @notifyCss
 </head>
 
-<body class="sidebar-mini">
+<body class="sidebar-mini layout-fixed">
     <x:notify-messages />
     @notifyJs
     <!-- jQuery -->
