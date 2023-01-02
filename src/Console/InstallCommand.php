@@ -42,8 +42,8 @@ class InstallCommand extends Command
         copy(__DIR__.'/../Rules/Password.php', app_path('/Rules/Password.php'));
 
 
-        app()->make(\App\Composer::class)->run(['require', 'yajra/laravel-datatables-oracle:^10.0']);
-        app()->make(\App\Composer::class)->run(['require', 'yajra/laravel-datatables:^9.0']);
+        app()->make(\App\Composer::class)->run(['require', 'yajra/laravel-datatables-oracle']);
+        app()->make(\App\Composer::class)->run(['require', 'yajra/laravel-datatables']);
         app()->make(\App\Composer::class)->run(['require', 'laravel/socialite']);
         app()->make(\App\Composer::class)->run(['require', 'mckenziearts/laravel-notify']);
 
