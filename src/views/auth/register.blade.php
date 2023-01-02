@@ -1,4 +1,4 @@
-@extends('auth::layouts.auth')
+@extends('layouts.auth')
 @section('content')
     <section class="background-radial-gradient overflow-hidden">
         <style>

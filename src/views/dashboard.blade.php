@@ -1,5 +1,5 @@
-@extends('auth::layouts.admin')
-@extends('auth::header.admin_header1')
+@extends('layouts.admin')
+@extends('header.admin_header1')
 @section('content')
 
   <!-- Content Wrapper. Contains page content -->

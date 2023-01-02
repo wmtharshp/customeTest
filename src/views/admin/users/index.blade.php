@@ -1,6 +1,6 @@
-@extends('auth::layouts.admin')
+@extends('layouts.admin')
 
-@extends('auth::header.admin_header1')
+@extends('header.admin_header1')
 
 @push('custom-style')
     <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free/css/all.min.css') }}">

@@ -1,6 +1,6 @@
-@extends('auth::layouts.admin')
+@extends('layouts.admin')
 
-@extends('auth::header.admin_header1')
+@extends('header.admin_header1')
 
 @section('content')
     <div class="content-wrapper">
