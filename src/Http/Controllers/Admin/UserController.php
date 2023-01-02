@@ -23,11 +23,11 @@ class UserController extends Controller
     }
 
     public function index(UsersDataTable $dataTable){
-        return $dataTable->with('user', $this->user)->render('auth::admin.users.index');
+        return $dataTable->with('user', $this->user)->render('admin.users.index');
     }
     
     public function create(){
-        return view('auth::admin.users.create');
+        return view('admin.users.create');
     }
 
     public function store(StoreRequest $request){
@@ -59,7 +59,7 @@ class UserController extends Controller
 
             $user = $this->user->find($id);
             if($user){
-                return view("auth::admin.users.edit",compact('user'));
+                return view("admin.users.edit",compact('user'));
             }
 
         }catch (Exception $e) {

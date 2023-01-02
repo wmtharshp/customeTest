@@ -21,7 +21,7 @@ class RegisterController extends Controller
     }
 
     public function show(){
-        return view('auth::auth.register');
+        return view('auth.register');
     } 
 
 

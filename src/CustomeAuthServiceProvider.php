@@ -29,8 +29,6 @@ class CustomeAuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // $this->loadRoutesFrom(__DIR__.'/routes/routes.php');
-        // $this->loadViewsFrom(__DIR__.'/views', 'auth');
         // // $this->publishes([
         // //     __DIR__.'/views' => resource_path('views/vendor/auth'),
         // // ]);

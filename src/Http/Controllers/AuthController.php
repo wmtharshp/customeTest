@@ -19,7 +19,7 @@ class AuthController extends Controller
     }
 
     public function show(){
-        return view('auth::auth.login');
+        return view('auth.login');
     } 
 
     public function login(LoginRequest $request){  
