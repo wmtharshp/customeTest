@@ -1,17 +1,17 @@
 <?php
 
-namespace Custome\Auth\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Custome\Auth\Http\Requests\LoginRequest;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use App\DataTables\UsersDataTable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-use Custome\Auth\Http\Requests\User\StoreRequest;
-use Custome\Auth\Http\Requests\User\UpdateRequest;
+use App\Http\Requests\User\StoreRequest;
+use App\Http\Requests\User\UpdateRequest;
 
 class UserController extends Controller 
 {

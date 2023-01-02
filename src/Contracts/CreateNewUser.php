@@ -1,6 +1,6 @@
 <?php
 
-namespace Custome\Auth\Contracts;
+namespace App\Contracts;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;

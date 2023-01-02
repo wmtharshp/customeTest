@@ -1,8 +1,8 @@
 <?php
 
-namespace Custome\Auth\Contracts;
+namespace App\Contracts;
 
-use Custome\Auth\Rules\Password;
+use App\Rules\Password;
 
 trait PasswordValidationRules
 {

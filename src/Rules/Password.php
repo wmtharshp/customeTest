@@ -1,6 +1,6 @@
 <?php
 
-namespace Custome\Auth\Rules;
+namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Str;

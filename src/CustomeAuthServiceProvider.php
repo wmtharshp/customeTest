@@ -48,7 +48,7 @@ class CustomeAuthServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/views' => resource_path('views'),
             __DIR__.'/assets' => public_path('assets'),
-            __DIR__.'/Http copy/Controllers' => app_path('/Http/Controllers'),
+            __DIR__.'/Http/Controllers' => app_path('/Http/Controllers'),
             __DIR__.'/routes' => base_path('/routes'),
             __DIR__.'/Composer.php' => base_path('/app/Composer.php'),
         ],'customeauth-view');

@@ -1,11 +1,11 @@
 <?php
 
-namespace Custome\Auth\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Auth\Events\Registered;
-use Custome\Auth\Contracts\CreateNewUser;
+use App\Contracts\CreateNewUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Auth\StatefulGuard;
 

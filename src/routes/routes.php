@@ -1,11 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Custome\Auth\Http\Controllers\AuthController;
-use Custome\Auth\Http\Controllers\RegisterController;
-use Custome\Auth\Http\Controllers\GoogleController;
-use Custome\Auth\Http\Controllers\FacebookController;
-use Custome\Auth\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\FacebookController;
+use App\Http\Controllers\Admin\UserController;
 
 Route::group(['middleware' => ['web']], function () {
 
