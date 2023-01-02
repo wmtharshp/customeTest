@@ -34,7 +34,7 @@ Route::group(['middleware' => ['web']], function () {
     ])->group(function () {
 
         Route::get('/home', function () {
-            return view('auth::dashboard');
+            return view('dashboard');
         })->name('home');
 
         Route::resources([
