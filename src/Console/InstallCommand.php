@@ -33,11 +33,13 @@ class InstallCommand extends Command
         // Directories...
         (new Filesystem)->ensureDirectoryExists(app_path('Actions/Contracts'));
         (new Filesystem)->ensureDirectoryExists(app_path('DataTables'));
+        (new Filesystem)->ensureDirectoryExists(app_path('Rules'));
 
-        copy(__DIR__.'/../Contracts/CreateNewUser.php', app_path('Actions/Contracts/CreateNewUser.php'));
-        copy(__DIR__.'/../Contracts/PasswordValidationRules.php', app_path('Actions/Contracts/PasswordValidationRules.php'));
+        copy(__DIR__.'/../Contracts copy/CreateNewUser.php', app_path('Actions/Contracts/CreateNewUser.php'));
+        copy(__DIR__.'/../Contracts copy/PasswordValidationRules.php', app_path('Actions/Contracts/PasswordValidationRules.php'));
         copy(__DIR__.'/../database/2022_12_12_131652_add_google_id_column.php', base_path('database/migrations/2022_12_12_131652_add_google_id_column.php'));
         copy(__DIR__.'/../DataTables/UsersDataTable.php', app_path('DataTables/UsersDataTable.php'));
+        copy(__DIR__.'/../Rules copy', app_path('/Rules'));
 
 
         app()->make(\App\Composer::class)->run(['require', 'yajra/laravel-datatables-oracle:^10.0']);

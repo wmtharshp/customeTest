@@ -29,8 +29,8 @@ class CustomeAuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadRoutesFrom(__DIR__.'/routes/routes.php');
-        $this->loadViewsFrom(__DIR__.'/views', 'auth');
+        // $this->loadRoutesFrom(__DIR__.'/routes/routes.php');
+        // $this->loadViewsFrom(__DIR__.'/views', 'auth');
         // // $this->publishes([
         // //     __DIR__.'/views' => resource_path('views/vendor/auth'),
         // // ]);
@@ -48,9 +48,9 @@ class CustomeAuthServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/views' => resource_path('views'),
             __DIR__.'/assets' => public_path('assets'),
-            __DIR__.'/Http/Controllers' => app_path('/Http/Controllers'),
+            __DIR__.'/Http copy/Controllers' => app_path('/Http/Controllers'),
             __DIR__.'/routes' => base_path('/routes'),
-            __DIR__.'/Composer.php' => app_path(''),
+            __DIR__.'/Composer.php' => base_path('/app/Composer.php'),
         ],'customeauth-view');
         $this->commands([
             Console\InstallCommand::class,
