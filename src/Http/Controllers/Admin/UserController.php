@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Http\Requests\User\StoreRequest;
 use App\Http\Requests\User\UpdateRequest;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller 
 {
@@ -27,18 +28,20 @@ class UserController extends Controller
     }
     
     public function create(){
-        return view('admin.users.create');
+        $roles = Role::all();
+        return view('admin.users.create',compact('roles'));
     }
 
     public function store(StoreRequest $request){
 
-        $validated = $request->validated();
+        $validated = $request->safe()->only(['name', 'email','password']);
         $validated['password'] = Hash::make($validated['password']);
       
         DB::beginTransaction();
         try {
 
-            $this->user->create($validated);
+            $user = $this->user->create($validated);
+            $user->syncRoles($request->get('role'));
             DB::commit();
 
             // notify()->success('Record created successfully. ⚡️');
@@ -58,8 +61,10 @@ class UserController extends Controller
         try {
 
             $user = $this->user->find($id);
+            $userRole = $user->roles->pluck('name')->toArray();
+            $roles = Role::all();
             if($user){
-                return view("admin.users.edit",compact('user'));
+                return view("admin.users.edit",compact('user','roles','userRole'));
             }
 
         }catch (Exception $e) {
@@ -77,10 +82,11 @@ class UserController extends Controller
 
             $user = $this->user->find($id);
             $user->update($validated);
+            $user->syncRoles($request->get('role'));
             DB::commit();
              //Toast Message when new user register
-                // notify()->success('Record updated successfully. ⚡️');
-                drakify('success') ;
+                notify()->success('Record updated successfully. ⚡️');
+                // drakify('success') ;
                
             return redirect()->route('users.index')->with("success","Record updated successfully.");
 

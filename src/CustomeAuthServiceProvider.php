@@ -48,11 +48,14 @@ class CustomeAuthServiceProvider extends ServiceProvider
             __DIR__.'/assets' => public_path('assets'),
             __DIR__.'/Http/Controllers' => app_path('/Http/Controllers'),
             __DIR__.'/Http/Requests' => app_path('/Http/Requests'),
+            __DIR__.'/Http/Middleware' => app_path('/Http/Middleware'),
+            __DIR__.'/seeders' => app_path('/database/seeders'),
             __DIR__.'/routes' => base_path('/routes'),
             __DIR__.'/Composer.php' => base_path('/app/Composer.php'),
         ],'customeauth-view');
         $this->commands([
             Console\InstallCommand::class,
+            Console\PublishCommand::class,
         ]);
     }
 

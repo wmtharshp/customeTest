@@ -46,11 +46,13 @@ class InstallCommand extends Command
         app()->make(\App\Composer::class)->run(['require', 'yajra/laravel-datatables']);
         app()->make(\App\Composer::class)->run(['require', 'laravel/socialite']);
         app()->make(\App\Composer::class)->run(['require', 'mckenziearts/laravel-notify']);
+        app()->make(\App\Composer::class)->run(['require', 'spatie/laravel-permission']);
 
         // Storage...
         $this->callSilent('storage:link');
         $this->callSilent('vendor:publish', ['--tag' => 'datatables', '--force' => true]);
         $this->callSilent('vendor:publish', ['--provider' => 'Mckenziearts\Notify\LaravelNotifyServiceProvider', '--force' => true]);
+        $this->callSilent('vendor:publish', [ '--provider' => "Spatie\Permission\PermissionServiceProvider", '--force' => true]);
     }
 
 }

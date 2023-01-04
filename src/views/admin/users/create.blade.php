@@ -54,6 +54,17 @@
                                         <input type="password" name="password" class="form-control"
                                             id="exampleInputPassword1" placeholder="Password">
                                     </div>
+                                    <div class="form-group">
+                                        <label for="role">Role</label>
+                                        <select class="form-control" name="role" required>
+                                            <option value="">Please select role</option>
+                                            @foreach ($roles as $role)
+                                                <option value="{{ $role->id }}"
+                                                    >
+                                                    {{ $role->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                     <div class="form-group mb-0">
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" name="terms" class="custom-control-input"

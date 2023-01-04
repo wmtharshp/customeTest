@@ -20,11 +20,11 @@
                 <a href="#" class="nav-link">Contact</a>
             </li>
         </ul>
-       
+
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
             <!-- Navbar Search -->
-           
+
             <li class="nav-item">
                 <a class="nav-link" data-widget="navbar-search" href="#" role="button">
                     <i class="fas fa-search"></i>
@@ -58,7 +58,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <form action="{{route('logout')}}" method="POST">
+                <form action="{{ route('logout') }}" method="POST">
                     @csrf
                     <button type="submit" class="nav-link btn btn-sm text-white btn-danger">
                         <i class="fa-solid fa-right-from-bracket"></i> Logout
@@ -84,7 +84,7 @@
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
                     <img src="{{ asset('assets/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
-                        alt="User Image" >
+                        alt="User Image">
                 </div>
                 <div class="info">
                     <a href="#" class="d-block">{{ auth()->user()->name }}</a>
@@ -111,7 +111,8 @@
                     <!-- Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library -->
                     <li class="nav-item menu-open">
-                        <a href="{{route('home')}}" class="nav-link {{ Str::contains(Route::currentRouteName(), 'home') ? 'active' : '' }}">
+                        <a href="{{ route('home') }}"
+                            class="nav-link {{ Str::contains(Route::currentRouteName(), 'home') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Dashboard
@@ -120,16 +121,55 @@
 
                     </li>
 
-                    <li class="nav-item menu-open">
+                    @role('admin')
+                        <li class="nav-item menu-open">
 
-                        <a href="{{route('users.index')}}"
-                            class="nav-link {{ Str::contains(Route::currentRouteName(), 'users') ? 'active' : '' }}">
-                            <i class="nav-icon fa-solid fa-users"></i>
+                            <a href="{{ route('users.index') }}"
+                                class="nav-link {{ Str::contains(Route::currentRouteName(), 'users') ? 'active' : '' }}">
+                                <i class="nav-icon fa-solid fa-users"></i>
+                                <p>
+                                    Users
+                                </p>
+                            </a>
+
+                        </li>
+                    @endrole
+
+                    @php
+                        
+                    @endphp
+                    <li
+                        class="nav-item {{ Str::contains(Route::currentRouteName(), ['permissions', 'roles']) ? 'menu-open' : '' }}">
+                        <a href="#"
+                            class="nav-link {{ Str::contains(Route::currentRouteName(), ['permissions', 'roles']) ? 'active' : '' }}">
+                            <i class="nav-icon fa-solid fa-shield-halved"></i>
                             <p>
-                                Users
+                                Roles & Permissions
+                                <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
-
+                        @if (auth()->user()->can('permissions.index') || auth()->user()->can('roles.index'))
+                            <ul class="nav nav-treeview">
+                                @can('permissions.index')
+                                    <li class="nav-item">
+                                        <a href="{{ route('permissions.index') }}"
+                                            class="nav-link {{ Str::contains(Route::currentRouteName(), ['permissions']) ? 'active' : '' }}">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Permissions</p>
+                                        </a>
+                                    </li>
+                                @endcan
+                                @can('roles.index')
+                                    <li class="nav-item">
+                                        <a href="{{ route('roles.index') }}"
+                                            class="nav-link {{ Str::contains(Route::currentRouteName(), ['roles']) ? 'active' : '' }}"">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Roles</p>
+                                        </a>
+                                    </li>
+                                @endcan
+                            </ul>
+                        @endif
                     </li>
                 </ul>
             </nav>
