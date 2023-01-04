@@ -96,11 +96,11 @@ class PermissionsSeeder extends Seeder
             foreach($insert_data as $k => $value){
                 $insert_data_new = array();
                 $insert_data_new['title'] = $value['title'];
-                foreach($value['name'] as $k => $value){
-                    $insert_data_new['name'] = $value;
-                    $insert_data_new['description'] = $value['description'][$k];
+                foreach($value['name'] as $key => $val){
+                    $insert_data_new['name'] = $val;
+                    $insert_data_new['description'] = $value['description'][$key];
+                    Permission::create($insert_data_new);
                 }
-                Permission::create($insert_data);
             }
     }
 }

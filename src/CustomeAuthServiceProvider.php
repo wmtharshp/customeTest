@@ -29,27 +29,13 @@ class CustomeAuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // // $this->publishes([
-        // //     __DIR__.'/views' => resource_path('views/vendor/auth'),
-        // // ]);
-
-        // $this->commands([
-        //     Console\InstallCommand::class,
-        // ]);
-
-        // // Directories...
-        // (new Filesystem)->ensureDirectoryExists(app_path('Actions/Jetstream'));
-        // (new Filesystem)->ensureDirectoryExists(app_path('Actions/Fortify'));
-
-        // copy(__DIR__.'/Contracts/CreateNewUser.php', app_path('Actions/Fortify/CreateNewUser.php'));
-        // copy(__DIR__.'/database/2022_12_12_131652_add_google_id_column.php', base_path('database/migrations/2022_12_12_131652_add_google_id_column.php'));
         $this->publishes([
             __DIR__.'/views' => resource_path('views'),
             __DIR__.'/assets' => public_path('assets'),
             __DIR__.'/Http/Controllers' => app_path('/Http/Controllers'),
             __DIR__.'/Http/Requests' => app_path('/Http/Requests'),
             __DIR__.'/Http/Middleware' => app_path('/Http/Middleware'),
-            __DIR__.'/seeders' => app_path('/database/seeders'),
+            __DIR__.'/seeders' => base_path('/database/seeders'),
             __DIR__.'/routes' => base_path('/routes'),
             __DIR__.'/Composer.php' => base_path('/app/Composer.php'),
         ],'customeauth-view');

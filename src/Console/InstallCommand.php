@@ -37,8 +37,9 @@ class InstallCommand extends Command
 
         copy(__DIR__.'/../Contracts/CreateNewUser.php', app_path('Actions/Contracts/CreateNewUser.php'));
         copy(__DIR__.'/../Contracts/PasswordValidationRules.php', app_path('Actions/Contracts/PasswordValidationRules.php'));
-        copy(__DIR__.'/../database/2022_12_12_131652_add_google_id_column.php', base_path('database/migrations/2022_12_12_131652_add_google_id_column.php'));
         copy(__DIR__.'/../DataTables/UsersDataTable.php', app_path('DataTables/UsersDataTable.php'));
+        copy(__DIR__.'/../DataTables/RolesDataTable.php', app_path('DataTables/RolesDataTable.php'));
+        copy(__DIR__.'/../DataTables/PermissionsDataTable.php', app_path('DataTables/PermissionsDataTable.php'));
         copy(__DIR__.'/../Rules/Password.php', app_path('/Rules/Password.php'));
 
 
