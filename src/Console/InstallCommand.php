@@ -63,6 +63,7 @@ class InstallCommand extends Command
 
         $this->updateKernelFile();
         
+        $this->callSilent('migrate');
         $this->callSilent('db:seed', ['--class' => 'PermissionsSeeder', '--force' => true]);
         $this->callSilent('db:seed', ['--class' => 'RoleSeeder', '--force' => true]);
         $this->callSilent('db:seed', ['--class' => 'AdminSeeder', '--force' => true]);
