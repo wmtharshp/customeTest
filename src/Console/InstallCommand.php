@@ -51,7 +51,6 @@ class InstallCommand extends Command
         app()->make(\App\Composer::class)->run(['require', 'mckenziearts/laravel-notify']);
         app()->make(\App\Composer::class)->run(['require', 'spatie/laravel-permission']);
 
-        $this->replaceInFile();
         // Storage...
         $this->callSilent('publish:name');
 
@@ -70,14 +69,14 @@ class InstallCommand extends Command
     }
 
     public function updateConfigFile(){
-        if (! Str::contains(file_get_contents(base_path('config/app.php')), "Spatie\Permission\PermissionServiceProvider::class,")) {
+        if (! Str::contains(file_get_contents(base_path('config/app.php')), "PermissionServiceProvider")) {
             $search = "App\Providers\RouteServiceProvider::class,";
             $str = file_get_contents(base_path('config/app.php'));
             $slice = Str::after($str, $search);
     
             $aliases = "// 'ExampleClass' => App\Example\ExampleClass::class,";
-            $new_slice = Str::after($str, $aliases);
-            $old_slice = Str::before($str, $aliases).'"DataTables" => Yajra\DataTables\Facades\DataTables::class,'.$new_slice;
+            $new_slice = Str::after($slice, $aliases);
+            $old_slice = Str::before($slice, $aliases).'"DataTables" => Yajra\DataTables\Facades\DataTables::class,'.$new_slice;
     
             $first_slice = Str::before($str, $search);
             $new_content = $first_slice . "
@@ -105,7 +104,7 @@ class InstallCommand extends Command
     }
 
     public function updateUserModel(){
-        if (! Str::contains(file_get_contents(app_path('Models/User.php')), "use Laravel\Sanctum\HasApiTokens;")) {
+        if (! Str::contains(file_get_contents(app_path('Models/User.php')), "HasRoles;")) {
         $search = 'use Laravel\Sanctum\HasApiTokens;';
         $str = file_get_contents(app_path('Models/User.php'));
         $slice = Str::after($str, $search);
