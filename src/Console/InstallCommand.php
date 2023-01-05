@@ -5,6 +5,7 @@ use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use RuntimeException;
 use Exception;
+use Illuminate\Support\Str;
 use Symfony\Component\Process\PhpExecutableFinder;
 use Symfony\Component\Process\Process;
 class InstallCommand extends Command
@@ -30,6 +31,7 @@ class InstallCommand extends Command
      */
     public function handle()
     {
+        $this->callSilent('vendor:publish', ['--tag' => 'customeauth-view', '--force' => true]);
         // Directories...
         (new Filesystem)->ensureDirectoryExists(app_path('Actions/Contracts'));
         (new Filesystem)->ensureDirectoryExists(app_path('DataTables'));
@@ -49,11 +51,87 @@ class InstallCommand extends Command
         app()->make(\App\Composer::class)->run(['require', 'mckenziearts/laravel-notify']);
         app()->make(\App\Composer::class)->run(['require', 'spatie/laravel-permission']);
 
+        $this->replaceInFile();
         // Storage...
-        $this->callSilent('storage:link');
-        $this->callSilent('vendor:publish', ['--tag' => 'datatables', '--force' => true]);
-        $this->callSilent('vendor:publish', ['--provider' => 'Mckenziearts\Notify\LaravelNotifyServiceProvider', '--force' => true]);
-        $this->callSilent('vendor:publish', [ '--provider' => "Spatie\Permission\PermissionServiceProvider", '--force' => true]);
+        $this->callSilent('publish:name');
+
+        $this->updateConfigFile();
+
+        $this->updateRouteServicesProvider();
+
+        $this->updateUserModel();
+
+        $this->updateKernelFile();
+        
+        $this->callSilent('db:seed', ['--class' => 'PermissionsSeeder', '--force' => true]);
+        $this->callSilent('db:seed', ['--class' => 'RoleSeeder', '--force' => true]);
+        $this->callSilent('db:seed', ['--class' => 'AdminSeeder', '--force' => true]);
+    }
+
+    public function updateConfigFile(){
+        if (! Str::contains(file_get_contents(base_path('config/app.php')), "Spatie\Permission\PermissionServiceProvider::class,")) {
+            $search = "App\Providers\RouteServiceProvider::class,";
+            $str = file_get_contents(base_path('config/app.php'));
+            $slice = Str::after($str, $search);
+    
+            $aliases = "// 'ExampleClass' => App\Example\ExampleClass::class,";
+            $new_slice = Str::after($str, $aliases);
+            $old_slice = Str::before($str, $aliases).'"DataTables" => Yajra\DataTables\Facades\DataTables::class,'.$new_slice;
+    
+            $first_slice = Str::before($str, $search);
+            $new_content = $first_slice . "
+            App\Providers\RouteServiceProvider::class, 
+            Spatie\Permission\PermissionServiceProvider::class,
+            Mckenziearts\Notify\LaravelNotifyServiceProvider::class,
+            Yajra\DataTables\DataTablesServiceProvider::class,
+            Yajra\DataTables\HtmlServiceProvider::class,".$old_slice;
+            file_put_contents(base_path('config/app.php'),$new_content );
+        }
+    }
+
+    public function updateRouteServicesProvider(){
+        if (! Str::contains(file_get_contents(app_path('Providers/RouteServiceProvider.php')), "routes/routes.php")) {
+            $search = '$this->routes(function () {';
+            $str = file_get_contents(app_path('Providers/RouteServiceProvider.php'));
+            $slice = Str::after($str, $search);
+            $first_slice = Str::before($str, $search);
+            $new_content = $first_slice . '
+            $this->routes(function () { 
+                Route::middleware("web")
+                ->group(base_path("routes/routes.php"));'.$slice;
+            file_put_contents(app_path('Providers/RouteServiceProvider.php'),$new_content );
+        }
+    }
+
+    public function updateUserModel(){
+        if (! Str::contains(file_get_contents(app_path('Models/User.php')), "use Laravel\Sanctum\HasApiTokens;")) {
+        $search = 'use Laravel\Sanctum\HasApiTokens;';
+        $str = file_get_contents(app_path('Models/User.php'));
+        $slice = Str::after($str, $search);
+
+        $another_search = "use HasApiTokens";
+        $new_slice = Str::after($slice, $another_search);
+        $old_slice = Str::before($slice, $another_search).'use HasApiTokens , HasRoles '.$new_slice;
+
+        $first_slice = Str::before($str, $search);
+        $new_content = $first_slice . 'use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;'.$old_slice;
+        file_put_contents(app_path('Models/User.php'),$new_content );
+        }
+    }
+
+    public function updateKernelFile(){
+        if (! Str::contains(file_get_contents(app_path('Http/Kernel.php')), "\Spatie\Permission\Middlewares\RoleMiddleware::class,")) {
+        $search = "'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,";
+        $str = file_get_contents(app_path('Http/Kernel.php'));
+            $slice = Str::after($str, $search);
+            $first_slice = Str::before($str, $search);
+            $new_content = $first_slice . "'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
+        'permission' => \App\Http\Middleware\PermissionMiddleware::class,
+        'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,".$slice;
+            file_put_contents(app_path('Http/Kernel.php'),$new_content );
+        }
     }
 
 }
