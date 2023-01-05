@@ -52,15 +52,16 @@ class InstallCommand extends Command
         app()->make(\App\Composer::class)->run(['require', 'spatie/laravel-permission']);
 
         // Storage...
-        $this->callSilent('publish:name');
-
+        
         $this->updateConfigFile();
-
+        
         $this->updateRouteServicesProvider();
-
+        
         $this->updateUserModel();
-
+        
         $this->updateKernelFile();
+        
+        $this->callSilent('publish:name');
         
         $this->callSilent('migrate');
         $this->callSilent('db:seed', ['--class' => 'PermissionsSeeder', '--force' => true]);
