@@ -31,6 +31,8 @@ class RegisterController extends Controller
 
         $this->guard->login($user);
         
+        $user->assignRole('user');
+        
         $request->session()->regenerate();
 
          return redirect()->intended('home')

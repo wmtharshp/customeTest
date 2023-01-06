@@ -40,6 +40,8 @@ class GoogleController extends Controller
                         'password' => Hash::make($user->id)
                     ]);
          
+                $newUser->assignRole('user');
+                
                 Auth::login($newUser);
         
                 return redirect()->intended('home');

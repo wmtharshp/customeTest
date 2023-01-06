@@ -17,5 +17,7 @@ class RoleSeeder extends Seeder
     {
         $role = Role::create(['name' => 'admin']);
         $role->syncPermissions(Permission::pluck('name','name')->toArray());
+        $userRole = Role::create(['name' => 'user']);
+        $userRole->syncPermissions(Permission::pluck('name','name')->where('name','home')->toArray());
     }
 }
